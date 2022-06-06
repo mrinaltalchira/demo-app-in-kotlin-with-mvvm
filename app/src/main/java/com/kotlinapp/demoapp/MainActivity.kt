@@ -73,14 +73,14 @@ lateinit var appDatabaseobj:AppDatabase
 
     fun getData(num: String) {
 
-        val listrd = appDatabaseobj.getAppDao().getImage().observe(this, Observer {
+    /*    val listrd = appDatabaseobj.getAppDao().getImage().observe(this, Observer {
             val mainAdapter = AdapterImg()
         if (it != null){
             mainAdapter.setImg(  it , this@MainActivity)
         }
 //            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
 
-        })
+        })*/
 
 
     }
