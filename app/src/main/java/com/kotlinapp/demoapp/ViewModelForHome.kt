@@ -31,6 +31,7 @@ class HomeViewModel(val repository: Repository): ViewModel() {
                     loading.value = false
                     Log.d("response.body()","${response.body()}")
                 } else {
+                    loading.value = true
                     Log.d("data", response.body().toString())
 
                 }
@@ -48,7 +49,7 @@ class HomeViewModel(val repository: Repository): ViewModel() {
     private fun onError(message: String) {
         try {
             errorMessage.value = message
-            loading.value = false
+            loading.value = true
             return
         }catch (e:Exception){}
     }

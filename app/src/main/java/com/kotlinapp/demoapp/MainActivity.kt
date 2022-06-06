@@ -21,6 +21,7 @@ lateinit var appDatabaseobj:AppDatabase
     private lateinit var viewModel: HomeViewModel
     lateinit var rView: RecyclerView
 
+    lateinit var list:ImageApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,25 +36,7 @@ lateinit var appDatabaseobj:AppDatabase
 
         rView = findViewById(R.id.rv_mainCategory)
 
-        getData("33")
 
-        binding.page1.setOnClickListener { getData("30") }
-        binding.page2.setOnClickListener { getData("31") }
-        binding.page3.setOnClickListener { getData("32") }
-
-
-    }
-
-    fun getData(num: String) {
-
-//        val listrd = appDatabaseobj.getAppDao().getImage().observe(this, Observer {
-//            val mainAdapter = AdapterImg()
-//        if (it != null){
-////            mainAdapter.setImg(  it , this@MainActivity)
-//        }
-////            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-//
-//        })
 
         viewModel.homephoto.observe(this, Observer {
             if (it != null) {
@@ -71,18 +54,36 @@ lateinit var appDatabaseobj:AppDatabase
         })
 
         viewModel.errorMessage.observe(this, Observer {
-            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+
+            binding.loadingShimmer.shimmerViewContainer.
+            visibility = View.VISIBLE
         })
         viewModel.loading.observe(this, Observer {
             if (it) {
-                binding.shimmerViewContainer.isShimmerStarted
-                binding.shimmerViewContainer.visibility = View.VISIBLE
+                binding.loadingShimmer.shimmerViewContainer.visibility = View.VISIBLE
             } else {
-                binding.shimmerViewContainer.hideShimmer()
-                binding.shimmerViewContainer.visibility = View.GONE
-            }
+                binding.loadingShimmer.shimmerViewContainer.visibility = View.GONE
+                }
         })
-        viewModel.getHomeImg(num)
+        viewModel.getHomeImg("33")
+
+
+
     }
+
+    fun getData(num: String) {
+
+//        val listrd = appDatabaseobj.getAppDao().getImage().observe(this, Observer {
+//            val mainAdapter = AdapterImg()
+//        if (it != null){
+////            mainAdapter.setImg(  it , this@MainActivity)
+//        }
+////            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+//
+//        })
+
+
+    }
+
 
 }
