@@ -10,12 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlinapp.demoapp.room.AppDatabase
 import com.kotlinapp.demoapp.adapter.AdapterImg
+import com.kotlinapp.demoapp.dataClass.ImageApi
 import com.kotlinapp.demoapp.databinding.ActivityMainBinding
 import com.kotlinapp.demoapp.network.Repository
 import com.kotlinapp.demoapp.network.Retrofit
 
 class MainActivity : AppCompatActivity() {
-//lateinit var appDatabaseobj:AppDatabase
+lateinit var appDatabaseobj:AppDatabase
     lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: HomeViewModel
     lateinit var rView: RecyclerView
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        appDatabaseobj = AppDatabase.getAppDBInstance(this)
+        appDatabaseobj = AppDatabase.getAppDBInstance(this)
         val retrofitService = Retrofit.getInstance()
         val repository = Repository(retrofitService)
         viewModel = ViewModelProvider(this, VMFactory(repository)).get(
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 //        val listrd = appDatabaseobj.getAppDao().getImage().observe(this, Observer {
 //            val mainAdapter = AdapterImg()
 //        if (it != null){
-//            mainAdapter.setImg(it, this@MainActivity)
+////            mainAdapter.setImg(  it , this@MainActivity)
 //        }
 ////            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
 //
@@ -56,11 +57,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.homephoto.observe(this, Observer {
             if (it != null) {
-                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
 
 
-//                appDatabaseobj.getAppDao().deleteAll()
-//                appDatabaseobj.getAppDao().insertAll(it)
+                appDatabaseobj.getAppDao().deleteAll()
+                appDatabaseobj.getAppDao().insertAll(it[0])
+
                 val mainAdapter = AdapterImg()
                 mainAdapter.setImg(it, this@MainActivity)
                 Log.d("response.body()", it.toString())

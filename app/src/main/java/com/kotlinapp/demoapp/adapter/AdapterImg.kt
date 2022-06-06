@@ -21,6 +21,7 @@ class  AdapterImg : RecyclerView.Adapter<AdapterImg.MainViewHolder>() {
         notifyDataSetChanged()
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
 
         val inflater = LayoutInflater.from(parent.context)
