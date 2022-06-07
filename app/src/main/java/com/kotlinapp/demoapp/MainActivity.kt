@@ -15,6 +15,40 @@ import com.kotlinapp.demoapp.databinding.ActivityMainBinding
 import com.kotlinapp.demoapp.network.Repository
 import com.kotlinapp.demoapp.network.Retrofit
 
+ /*                                               Please read this
+
+
+                                                  what i've done !
+
+         i've used MVVM architecture while building this application , Used Retrofit for Api Response .
+         added shimmer loading effect while loading the data ,pending network error issue.
+         added Room Databse .
+         while using roomDB in this what i have done is to save data in roomDB and update/replace data when network
+         is available and recive updated data ..
+
+                                                   where im stucked
+
+        while geting data from roomDB im facing a issue which is DataClass mismatch problem , problem is !
+        adapter function need ImageApi (DataClass) but RoomDB is sending ImageApiItem (DataClass) which is child
+        class of ImageApi. and rest of things are working totally fine.
+
+
+        **** I do believe in to upgrade my skills day by day i do also have best and clean MVVM architecture patern
+         which i haven't used in this due to lack of time
+
+         there is a lots of things in it which i've to improve like
+         memory management
+         space management
+         code reusablity
+         handle minor things
+
+         *****
+
+
+*/
+
+
+
 class MainActivity : AppCompatActivity() {
 lateinit var appDatabaseobj:AppDatabase
     lateinit var binding: ActivityMainBinding
@@ -35,8 +69,6 @@ lateinit var appDatabaseobj:AppDatabase
         )
 
         rView = findViewById(R.id.rv_mainCategory)
-
-
 
         viewModel.homephoto.observe(this, Observer {
             if (it != null) {
